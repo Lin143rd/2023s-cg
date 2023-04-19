@@ -1,9 +1,45 @@
 {
-    "button": [
+    "content": [
+        {
+            "name": "環境",
+            "value": 0,
+            "caption": [
+                {
+                    "title": "環境",
+                    "explanation": "React.js, Three.jsを使用\n"
+                }
+            ]
+
+        },
         {
             "name": "基本課題M1",
-            "value": 0,
-            "componentName": "WorkM1"
+            "value": 1,
+            "caption": [
+                {
+                    "title": "2次ベジェ曲線",
+                    "explanation": "実装内容:2Dベジェ曲線\n考察、感想:todo"
+                },
+                {
+                    "title": "2次ベジェ曲線",
+                    "explanation": "test2"
+                },
+                {
+                    "title": "2次ベジェ曲線",
+                    "explanation": "test2"
+                },
+                {
+                    "title": "2次ベジェ曲線",
+                    "explanation": "test2"
+                }
+            ]
+        },
+        {
+            "name": "test",
+            "value": 2,
+            "caption": [
+
+            ]
+
         }
     ]
 }

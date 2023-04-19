@@ -1,18 +1,18 @@
 import React from "react";
 import config from "../config.json"
-import "../style/content.css"
 import Work from "../work/work"
+import "../style/content.css"
 
 function Content(props: {radioValue: number})
 {
-    const radios = config.button;
+    const radios = config.content;
     return (
         <div className="content">
-            {radios.map((radio, idx) => (
-                props.radioValue === radio.value && (
-                    <Work value={radio.value} key={idx}/>
-                )
-            ))}
+            {radios.map((radio, idx) => {
+                return (props.radioValue === radio.value && 
+                    <Work key={idx} value={radio.value} />
+                )}
+            )}
         </div>
     );
 }

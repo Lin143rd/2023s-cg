@@ -1,0 +1,10 @@
+.caption-title {
+    margin: 30px 0px;
+    padding: 1rem 1rem;
+    border-top: 3px solid black;
+    border-bottom: 3px solid black;
+}
+
+.caption-explanation {
+    white-space: pre-wrap;
+}

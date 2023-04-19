@@ -6,11 +6,11 @@ import ToggleButton from 'react-bootstrap/ToggleButton';
 
 interface Props {
     radioValue: number,
-    setRadioValue: Dispatch<SetStateAction<number>>
+    setRadioValue: any
 }
 
 function Menu(props: Props) {
-    const radios = config.button;
+    const radios = config.content;
     return (
         <ButtonGroup className="buttongroup" defaultValue={props.radioValue}>
             {radios.map((radio, idx) => (
@@ -22,7 +22,7 @@ function Menu(props: Props) {
                     name="radio"
                     value={radio.value}
                     checked={props.radioValue === radio.value}
-                    onChange={(e) => props.setRadioValue(Number(e.currentTarget.value))}
+                    onChange={(e) => {props.setRadioValue(Number(e.target.value))}}
                 >
                     {radio.name}
                 </ToggleButton>
