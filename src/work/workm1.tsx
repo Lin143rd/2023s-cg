@@ -1,54 +1,118 @@
-import React, { ReactElement, useEffect, useState } from "react";
-import { Canvas, useThree } from "@react-three/fiber"
+import React, { ReactElement, useState, useEffect } from "react";
+import { Canvas } from "@react-three/fiber"
 import PointFromArray from "../threecomponents/pointfromarray";
 import Caption from "../components/caption";
 import config from "../config.json"
 import "../style/canvas.css"
 import { Vector3 } from "three";
+import { Combination } from "../util/combination";
 
-function BezierCurve2D(props: {p0: Vector3, p1: Vector3, p2: Vector3, setState?: any[]}) {
-  const SIZE = 3;
-  const LENGTH = 100;
+function BezierCurve(props: {p: Vector3[], isRegularInterval: boolean, onDrag?: any}) {
+  const LINEAR_SIZE = 4;
+  const CORNER_SIZE = 4;
+  const LENGTH = 20;
+  const n = props.p.length;
   const vertices = [];
-  for(let i = 0; i <= LENGTH; ++i) {
-    let t1 = i / LENGTH;
-    let t2 = 1 - t1;
-    const x = (t1 * t1 * props.p0.x + 2 * t1 * t2 * props.p1.x + t2 * t2 * props.p2.x);
-    const y = (t1 * t1 * props.p0.y + 2 * t1 * t2 * props.p1.y + t2 * t2 * props.p2.y);
-    const z = 0;
-    const vertex = new Vector3(x, y, z)
-    vertices.push(vertex);
-  }
 
-  const corner = [props.p0, props.p1, props.p2];
+  // create line vertices
+  if(props.isRegularInterval) {
+    for(let i = 0; i <= LENGTH - 1; ++i) {
+      const t = i / (LENGTH - 1)
+      let x = 0;
+      let y = 0;
+      let z = 0;
+      for(let j = 0; j < n; ++j) {
+        const weight = Math.pow(1 - t, n - 1 - j) * Math.pow(t, j) * Combination.nCk(n - 1, j);
+        x += props.p[j].x * weight
+        y += props.p[j].y * weight
+      }
+      const vertex = new Vector3(x, y, z)
+      vertices.push(vertex);
+    }
+  } else {
+    const createVertexFromDeCasteljau = (t: number, now: Vector3[]): Vector3 => {
+      // k次ベジェ曲線
+      if(now.length === 1)
+        return now[0]
+      let nxt = []
+      for(let i = 0; i < now.length - 1; ++i) {
+        nxt[i] = new Vector3((1 - t) * now[i].x + t * now[i + 1].x, (1 - t) * now[i].y + t * now[i + 1].y, 1)
+      }
+      return createVertexFromDeCasteljau(t, nxt);
+    }
+    for(let i = 0; i <= LENGTH - 1; ++i) {
+      const t = i / (LENGTH - 1)
+      const vertex = createVertexFromDeCasteljau(t, props.p)
+      vertices.push(vertex);
+    }
+  }
 
   return (
     <>
       {/* curve itself */}
-      <PointFromArray vertices={vertices} size={SIZE} color="red" />
+      <PointFromArray vertices={vertices} size={LINEAR_SIZE} color="black" />
       {/* corner */}
-      <PointFromArray vertices={corner} size={SIZE} color="black" setState={props.setState}/>
+      <PointFromArray vertices={props.p} size={CORNER_SIZE} color="red" onDrag={props.onDrag}/>
     </>
   );
 }  
 
 function WorkM1(props: {trigger: number}) {
+  let input: ReactElement[] = [];
   let element: ReactElement[] = [];
-  const [p0, setp0] = useState(new Vector3(-2, -2, 1))
-  const [p1, setp1] = useState(new Vector3(0, 0, 1))
-  const [p2, setp2] = useState(new Vector3(2, -2, 1))
-  const bezier2dSetStates = [setp0, setp1, setp2]
+
+  // Bezier ND
+  const maxN = 20;
+  useEffect(() => {
+    Combination.init(maxN);
+  }, [])
+  const [bezierN, setBezierN] = useState(maxN)
+  const [p, setP] = useState(Array.from({length: maxN}, () => new Vector3((Math.random() - 0.5) * 5, (Math.random() - 0.5) * 5, 1)))
+  const dragP = (index: number, v: Vector3) => {
+    setP(
+        p.map((vertex, idx) => (idx === index ? v : vertex))
+    )
+  }
+  const onSlideBezierN = (event: any) => {
+    setBezierN(event.target.value)
+  }
+  useEffect(() => {
+    setP(Array.from({length: bezierN}, () => new Vector3((Math.random() - 0.5) * 5, (Math.random() - 0.5) * 5, 1)))
+  }, [bezierN])
+  input.push(
+    <>
+      <input type="range" id="bezier_n" name="bezier_n" value={bezierN} min="3" max={maxN} onChange={onSlideBezierN} />
+      <label htmlFor="bezier_n">number of vertices: {bezierN}</label>
+    </>
+  )
   element.push(
-    <BezierCurve2D p0={p0} p1={p1} p2={p2} setState={bezier2dSetStates}/>
+    <>
+      <BezierCurve p={p} onDrag={dragP} isRegularInterval={true}/>
+    </>
   );
+
+  // Bezier ND with de Casteljau
+  const [bezierN_De, setBezierN_De] = useState(maxN)
+  const [p_De, setP_De] = useState(Array.from({length: maxN}, () => new Vector3((Math.random() - 0.5) * 5, (Math.random() - 0.5) * 5, 1)))
+  const dragP_De = (index: number, v: Vector3) => {
+    setP_De(
+        p_De.map((vertex, idx) => (idx === index ? v : vertex))
+    )
+  }
+  const onSlideBezierN_De = (event: any) => {
+    setBezierN_De(event.target.value)
+  }
+  useEffect(() => {
+    setP_De(Array.from({length: bezierN_De}, () => new Vector3((Math.random() - 0.5) * 5, (Math.random() - 0.5) * 5, 1)))
+  }, [bezierN_De])
+  input.push(
+    <>
+      <input type="range" id="bezier_n_de" name="bezier_n_de" value={bezierN_De} min="3" max={maxN} onChange={onSlideBezierN_De} />
+      <label htmlFor="bezier_n_de">number of vertices: {bezierN_De}</label>
+    </>
+  )
   element.push(
-    <BezierCurve2D p0={p0} p1={p1} p2={p2} setState={bezier2dSetStates}/>
-  );
-  element.push(
-    <BezierCurve2D p0={p0} p1={p1} p2={p2} setState={bezier2dSetStates}/>
-  );
-  element.push(
-    <BezierCurve2D p0={p0} p1={p1} p2={p2} setState={bezier2dSetStates}/>
+    <BezierCurve p={p_De} onDrag={dragP_De} isRegularInterval={false}/>
   );
 
   const caption = config.content[1].caption
@@ -59,6 +123,7 @@ function WorkM1(props: {trigger: number}) {
           caption?.map((item, idx) => (
             <div key={idx}>
               <Caption title={item.title} explanation={item.explanation} />
+              {input[idx]}
               <div className="canvas">
                 <Canvas orthographic camera={{ zoom: 50, position: [0, 0, 100] }}>
                   <ambientLight />

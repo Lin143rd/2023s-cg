@@ -1,4 +1,4 @@
-import React, { Dispatch, SetStateAction } from 'react';
+import React from 'react';
 import "../style/menu.css";
 import config from "../config.json"
 import ButtonGroup from "react-bootstrap/ButtonGroup";
