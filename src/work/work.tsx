@@ -2,10 +2,11 @@ import React, { ReactElement } from "react";
 import WorkM1 from "./workm1";
 import Environment from "../components/environment";
 import "../style/work.css"
+import Undone from "./undone";
 
 function Work(props: {value: number})
 {
-    let element: ReactElement = <></>;
+    let element: ReactElement = <Undone />;
 
     switch(props.value) {
         case 0:

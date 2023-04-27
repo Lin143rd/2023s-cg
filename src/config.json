@@ -34,8 +34,16 @@
             ]
         },
         {
-            "name": "test",
+            "name": "発展課題M2",
             "value": 2,
+            "caption": [
+
+            ]
+
+        },
+        {
+            "name": "発展課題M3",
+            "value": 3,
             "caption": [
 
             ]
