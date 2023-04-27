@@ -18,7 +18,6 @@ function Work(props: {value: number})
         default:
             break;
     }
-    console.log(element)
 
     return (
         <div className="work">
