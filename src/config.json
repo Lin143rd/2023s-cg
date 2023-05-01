@@ -5,10 +5,6 @@
             "filename": "environment",
             "value": 0,
             "caption": [
-                {
-                    "title": "環境",
-                    "explanation": "React.js, Three.jsを使用\n"
-                }
             ]
 
         },
@@ -19,15 +15,15 @@
             "caption": [
                 {
                     "title": "n次ベジェ曲線",
-                    "explanation": "Drag & Drop and you can move vertices\n\n実装内容：n次ベジェ曲線、tは一定間隔、20個の頂点を用いて多項式サンプリング\n考察、感想:todo 適応的サンプリング\n\n"
+                    "explanation": "Drag & Drop and you can move vertices\n\n実装内容：n次ベジェ曲線、tは一定間隔、20個の頂点を用いて多項式サンプリング\n考察、感想:環境構築メイン。なんとなくのベジェ曲線の挙動を理解できた。\n\n"
                 },
                 {
                     "title": "n次ベジェ曲線(de Casteljau)",
-                    "explanation": "Drag & Drop and you can move vertices\n\n実装内容：n次ベジェ曲線、tは一定間隔、20個の頂点を用いてde Casteljauのアルゴリズムでサンプリング\n考察、感想:\n\n"
+                    "explanation": "Drag & Drop and you can move vertices\n\n実装内容：n次ベジェ曲線、tは一定間隔、20個の頂点を用いてde Casteljauのアルゴリズムでサンプリング\n考察、感想:少し数値が荒ぶるとスライドにあったが、あまり確認できず。\n\n"
                 },
                 {
                     "title": "有理ベジェ曲線",
-                    "explanation": "Drag & Drop and you can move vertices\n\n実装内容：有理n次ベジェ曲線、tは一定間隔、20個の頂点を用いて多項式サンプリング\n考察、感想:負の重みの吹っ飛びがやばい（仮）\n\n"
+                    "explanation": "Drag & Drop and you can move vertices\n\n実装内容：有理n次ベジェ曲線、tは一定間隔、20個の頂点を用いて多項式サンプリング\n考察、感想:負の重みがとにかく吹っ飛ぶ。\n負の数が混ざることで正規化前の重みの和が小さくなり、正規化後の重みが増大している。\n正の方向に吹っ飛ぶのは正規化前の重みの和が負になっているため。\nどちらも、頂点を増やす（重みの和を増やす）と挙動が吹っ飛ばない。\n\n"
                 }
             ]
         },

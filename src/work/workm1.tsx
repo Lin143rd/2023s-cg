@@ -69,7 +69,7 @@ function BezierCurveWeight(props: {p: Vector3[], w: number[], onDrag?: any}) {
     const t = i / (LENGTH - 1)
     let x = 0;
     let y = 0;
-    let z = 0;
+    let z = 1;
 
     // normalize weight
     let weight = [];
@@ -183,6 +183,8 @@ function WorkM1(props: {trigger: number}) {
     <>
       <input type="range" id="bezier_n_w" name="bezier_n_w" value={bezierN_w} min="3" max={maxN} onChange={onSlideBezierN_w} />
       <label htmlFor="bezier_n_w">number of vertices: {bezierN_w}</label>
+      <br/>
+      <br/>
       {weight.map((w, idx) => {
         const w_name = `w_${idx + 1}`
         if(idx >= bezierN_w)
