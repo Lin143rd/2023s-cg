@@ -23,15 +23,11 @@
                 },
                 {
                     "title": "n次ベジェ曲線(de Casteljau)",
-                    "explanation": "Drag & Drop and you can move vertices\n\n実装内容：n次ベジェ曲線、tは一定間隔、20個の頂点を用いてde Casteljauのアルゴリズムでサンプリング\n考察、感想:特になし\n\n"
+                    "explanation": "Drag & Drop and you can move vertices\n\n実装内容：n次ベジェ曲線、tは一定間隔、20個の頂点を用いてde Casteljauのアルゴリズムでサンプリング\n考察、感想:\n\n"
                 },
                 {
-                    "title": "2次ベジェ曲線",
-                    "explanation": "test2"
-                },
-                {
-                    "title": "2次ベジェ曲線",
-                    "explanation": "test2"
+                    "title": "有理ベジェ曲線",
+                    "explanation": "Drag & Drop and you can move vertices\n\n実装内容：有理n次ベジェ曲線、tは一定間隔、20個の頂点を用いて多項式サンプリング\n考察、感想:負の重みの吹っ飛びがやばい（仮）\n\n"
                 }
             ]
         },
