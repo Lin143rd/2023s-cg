@@ -9,7 +9,7 @@ const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 
-const routerBaseName = process.env.PUBLIC_URL + "2023s-cg/docs";
+const routerBaseName = process.env.PUBLIC_URL + "2023s-cg";
 
 root.render(
   <React.StrictMode>
