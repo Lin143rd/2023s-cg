@@ -88,6 +88,7 @@ function PointFromArray(props: {vertices: Vector3[], size: number, color: string
                                         item.y,
                                         0
                                     ]}
+                                    key={"text" + {idx}}
                                     color="red"
                                     fontSize={0.3}
                                     anchorX="center"
@@ -121,7 +122,7 @@ function PointFromArray(props: {vertices: Vector3[], size: number, color: string
                         }
                     )}
                 </Points>
-                <Line points={props.vertices} />
+                <Line points={props.vertices} color={"black"} />
             </>
         );
     }
