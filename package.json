@@ -18,6 +18,7 @@
     "react": "^18.2.0",
     "react-bootstrap": "^2.7.4",
     "react-dom": "^18.2.0",
+    "react-router-dom": "^6.11.0",
     "react-scripts": "5.0.1",
     "three": "^0.151.3",
     "three-stdlib": "^2.21.8",
@@ -25,8 +26,8 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "REACT_APP_PUBLIC_URL=https://lin143rd.github.io/2023s-cg react-scripts start",
-    "build": "REACT_APP_PUBLIC_URL=https://lin143rd.github.io/2023s-cg react-scripts build",
+    "start": "react-scripts start",
+    "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "rm": "rmdir /s /q docs",
